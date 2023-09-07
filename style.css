@@ -1,0 +1,13 @@
+body { font-family:verdana; background-color: rgb(5, 90, 5);  color: white; margin: 0; }
+table, tr, td { border: 2px solid black; border-collapse: collapse; }
+#phpversion { position:fixed; bottom: 2px; right: 11px; font-size: 0.8em; }
+.prodtitre {  color: black; background-color: pink; text-align: center;  }
+.prodtitre:hover { background-color: rgb(0, 221, 255); }
+.prix {  text-align: right;  }
+.btnsmoum {  width: 111px;  height: 44px;  }
+.btnzonad { width: 111px; height: 22px; }
+.survol:hover { background-color: rgb(0, 221, 255); color: black; }
+.lignédit { background-color: black; }
+.titrebloc { background-color: black; color:pink; text-align: center; }
+.madzane { display:none; }
+.numzone { text-align: right; }
