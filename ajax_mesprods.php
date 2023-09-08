@@ -36,7 +36,7 @@
             echo "<td><button onclick='lesroidugag(" . $val["id_prod"] . ")'>DEL</button></td>";//bouton effacer un produits
             echo "<td><button onclick='pour100briq(" . $val["id_prod"] . ", " . $ligne . ")'>ÉDiT</button></td>";//bouton éditer un produits
             echo "<td><button onclick='yarienàvoir(" . $val["id_prod"] . ")'>ADD</button></td>";//bouton ajouter un article à la liste de course
-            echo "<td>" . $val["id_prod"] . "</td>";
+            echo "<td class='debug'>" . $val["id_prod"] . "</td>";
             echo "</tr>";
             $ligne++;
          }

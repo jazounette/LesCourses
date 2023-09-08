@@ -11,6 +11,10 @@ table, tr, td { border: 2px solid black; border-collapse: collapse; }
 .btnzonad { width: 111px; height: 22px; }
 .survol:hover { background-color: rgb(0, 221, 255); color: black; }
 .lignédit { background-color: black; }
-.titrebloc { background-color: black; color:pink; text-align: center; font-weight: bold; }
+.titrebloc { background-color: black; color:pink; text-align: center; }
 .madzane { display:none; }
 .numzone { text-align: right; }
+
+
+/* dans ajax_mesprods, ajax_maliste, ajax_divers, ajax_lycos */
+.debug { display: none; }

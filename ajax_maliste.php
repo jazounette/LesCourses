@@ -15,10 +15,10 @@
       foreach ($rep as $val) {
          $somprx += $val["prix"];
          echo '<tr>';
-         echo "<td>" . $val["id_list"] . "</td>";
-         echo "<td>" . $val["id_prod"] . "</td>";
+         echo "<td class='debug'>" . $val["id_list"] . "</td>";
+         echo "<td class='debug'>" . $val["id_prod"] . "</td>";
+         echo "<td class='debug'>" . $val["zone"] . "</td>";
          $euro = (isset($val["prix"])) ? "€" : "-";
-         echo "<td>" . $val["zone"] . "</td>";
          echo "<td>" . $val["describ"] . "</td>";
          echo "<td class='prix'>" . $val["prix"] . $euro . "</td>";
          echo "<td><button onclick='mafemmesap(" . $val["id_list"] . ")'>DEL</button></td>";
@@ -28,5 +28,5 @@
       echo "<tr><td colspan='4' style='text-align:right'>" . $req->rowCount() . $nompro[$nomrnd] . "</td></tr>";
       echo "</table>";
    } else {
-      echo "c'est vide est froid";
+      echo "<p>La liste de courses est vide</p>";
    }

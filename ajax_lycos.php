@@ -10,14 +10,13 @@
    if ($rep) {
       echo "<table>";
       foreach ($rep as $val) {
+         $euro = (isset($val["prix"])) ? "€" : "-";
          echo '<tr class="survol" onclick="yarienàvoir(' .$val["id_prod"] . ')">';
-         echo "<td>" . $val["id_prod"] . "</td>";
+         echo "<td class='debug'>" . $val["id_prod"] . "</td>";
          // echo "<td>" . $val["zone"] . "</td>";
          echo "<td>" . $val["describ"] . "</td>";
-         echo "<td>" . $val["prix"] . "</td>";
+         echo "<td class='prix'>" . $val["prix"] . $euro . "</td>";
          echo "</tr>";
       }
       echo "</table>";
-   } else {
-      echo "c'est vide est froid";
    }

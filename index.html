@@ -9,6 +9,7 @@
 <body>
    <p class="titrebloc">LISTE DE COURSES</p>
    <input id="lycos" type="text" name="lycos" placeholder="RECHERCHE" onkeyup="marchàlombre()">
+   <button onclick="cleanLycos()">X</button>
    <div id="réponse"></div>
    <div id="maliste"></div>
 
@@ -30,8 +31,8 @@
    <p class="titrebloc">ARTICLES DISPONIBLES</p>
    <div id="mesprods"></div>
 
-   <div id="débougajeu"></div>
-   <div id="phpversion"></div>
+   <div id="débougajeu" class="debug"></div>
+   <div id="phpversion" class="debug"></div>
 
    <script>
       window.addEventListener("load", vienchezmoi);
@@ -46,6 +47,10 @@
 
       function soumettre(toto){  cestlazone = toto;  }
       function ouverture(toto){  titrouvert = toto; jhabitechez();  }
+      function cleanLycos(){
+         document.getElementById("lycos").value = ""; 
+         document.getElementById("refajou").getElementsByTagName("input")["desc"].value = "";
+         document.getElementById("réponse").innerHTML = "";     }
 
       function AjaxContreHector(hurle, retouràpelle){ ///////////////////AJAX///////////////////
          const xhttp = new XMLHttpRequest();
@@ -175,3 +180,4 @@
 <!-- faire un système pour pouvoir changer la zone d'un produits en même temps que le nom et prix -->
 <!-- mettre un bouton pour effacer toute la liste de course -->
 <!-- Quand ajout nouveau produits, appuyer sur entré passe au champ suivant. -->
+<!-- faire du caseINsencitive pour la recherche Lycos sur serveur free -->
