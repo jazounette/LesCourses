@@ -6,5 +6,5 @@
    $prixConv = floatval($_GET['prix']);
    if ($prixConv) {  $req->bindValue(2, $prixConv);  } else {  $req->bindValue(2, NULL);  }
    $req->execute();
-   echo $_GET['idéd'] . " - " . $_GET['desc'] . " - " . $_GET['prix'] . "<br>";
+   // echo $_GET['idéd'] . " - " . $_GET['desc'] . " - " . $_GET['prix'] . "<br>";
    echo $req->rowCount();

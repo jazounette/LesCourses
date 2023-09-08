@@ -1,6 +1,9 @@
 body { font-family:verdana; background-color: rgb(5, 90, 5);  color: white; margin: 0; }
 table, tr, td { border: 2px solid black; border-collapse: collapse; }
 #phpversion { position:fixed; bottom: 2px; right: 11px; font-size: 0.8em; }
+#débougajeu { position:fixed; top: 0px; right: 0px; 
+            background-color: rgb(19, 28, 89); border: 1px solid white;
+            padding: 11px; border-radius: 9px; font-size: 0.8em; }
 .prodtitre {  color: black; background-color: pink; text-align: center;  }
 .prodtitre:hover { background-color: rgb(0, 221, 255); }
 .prix {  text-align: right;  }
@@ -8,6 +11,6 @@ table, tr, td { border: 2px solid black; border-collapse: collapse; }
 .btnzonad { width: 111px; height: 22px; }
 .survol:hover { background-color: rgb(0, 221, 255); color: black; }
 .lignédit { background-color: black; }
-.titrebloc { background-color: black; color:pink; text-align: center; }
+.titrebloc { background-color: black; color:pink; text-align: center; font-weight: bold; }
 .madzane { display:none; }
 .numzone { text-align: right; }

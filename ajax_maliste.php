@@ -5,13 +5,11 @@
    $quékette .= "where courses_liste.id_prod = courses_prods.id_prod ";
    $quékette .= "order by courses_prods.zone, courses_prods.describ;";
    $req = $db->query($quékette);
-   // $req = $db->query("select * from courses_liste join courses_prods where courses_liste.id_prod = courses_prods.id_prod order by courses_prods.zone;");
    $rep = $req->fetchAll(PDO::FETCH_ASSOC);
    $nompro = array(" Bidules", " Machins", " Trucs", " Articles");
    $nomrnd = rand(0, 3);
    $somprx = 0;
 
-   // echo "<pre>"; print_r ($rep); echo "/<pre>";
    if ($rep) {
       echo "<table>";
       foreach ($rep as $val) {

@@ -30,6 +30,7 @@
    <p class="titrebloc">ARTICLES DISPONIBLES</p>
    <div id="mesprods"></div>
 
+   <div id="débougajeu"></div>
    <div id="phpversion"></div>
 
    <script>
@@ -46,7 +47,7 @@
       function soumettre(toto){  cestlazone = toto;  }
       function ouverture(toto){  titrouvert = toto; jhabitechez();  }
 
-      function AjaxContreHector(hurle, retouràpelle){///////////////////AJAX///////////////////
+      function AjaxContreHector(hurle, retouràpelle){ ///////////////////AJAX///////////////////
          const xhttp = new XMLHttpRequest();
          xhttp.onreadystatechange = function() {
             /////////////////////////////////// gérer les autres état: 1, 2, 3.
@@ -68,25 +69,14 @@
       }
 
       function yarienàvoir(idajou){ ////////////////////ajoute un article à la liste des courses
-         function retouràpelle(xhttp){
-            $toto = document.getElementById("réponse")
-            if (xhttp.responseText == 0) $toto.innerHTML = "l'article n'a pas pu être ajouté";///////////changer cela, test sur "0" et non 0
-            else { $toto.innerHTML = "article ajouté correctement"; vienchezmoi(); }
-         }
-         AjaxContreHector("ajax_listajou.php?idajou=" + idajou, retouràpelle);
+         document.getElementById("lycos").value = "";
+         AjaxContreHector("ajax_listajou.php?idajou=" + idajou, (xhttp)=> { if (xhttp.responseText != "0") vienchezmoi(); });
       }
-
       function mafemmesap(idsupp){ ///////////////////////efface article de la liste des courses
-         function retouràpelle(xhttp){
-            $toto = document.getElementById("réponse")
-            if (xhttp.responseText == 0) $toto.innerHTML = "l'article n'a pas pu être supprimé";///////////changer cela, test sur "0" et non 0
-            else { $toto.innerHTML = "article supprimé correctement"; vienchezmoi(); }
-         }
-         AjaxContreHector("ajax_listsupp.php?idsupp=" + idsupp, retouràpelle);
+         AjaxContreHector("ajax_listsupp.php?idsupp=" + idsupp, (xhttp)=> {if (xhttp.responseText != "0") vienchezmoi();} );
       }
       function pellerevien(idsupp){ ////////////////////////enléve une zone de la base de donnée
-         console.log("vire la zone: " + idsupp);
-         function retouràpelle(xhttp) { if (xhttp.responseText != "0") { zunecopine(); jhabitechez(); } }////////////////faire fonction fléchée
+         function retouràpelle(xhttp) { if (xhttp.responseText != "0") { zunecopine(); jhabitechez(); } }
          AjaxContreHector("ajax_zonesupp.php?idsupp=" + idsupp, retouràpelle);
       }
 
@@ -106,33 +96,25 @@
          AjaxContreHector("ajax_divers.php?faire=soumiss", chauliste);
       }
 
-      function pinosimple(e){//////////////////////////ajoute un article à la liste des produits
+      function pinosimple(e){ /////////////////////////ajoute un article à la liste des produits
          e.preventDefault();
          var données = new FormData(this);
-         console.log(données);
-         console.log(cestlazone);
+         titi = document.getElementById("refajou").getElementsByTagName("input");
+         titi["desc"].value = "";   titi["prix"].value = "";
          describ = encodeURIComponent(données.get("desc"));/////change le & en %26
          hurle = "ajax_prodajou.php?desc=" + describ + "&zone=" + cestlazone + "&prix=" + données.get("prix");
-
-         function retouràpelle(xhttp){
-            toto = document.getElementById("réponse")
-            if (xhttp.responseText == 0) toto.innerHTML = "l'article n'a pas pu être ajouté";///////////changer cela, test sur "0" et non 0
-            else { toto.innerHTML = "article ajouté correctement"; jhabitechez(); }
-         }
-         AjaxContreHector(hurle, retouràpelle);
+         AjaxContreHector(hurle, (xhttp)=> { if (xhttp.responseText !="0") jhabitechez(); });
       }
 
-      function lesroidugag(idsupp){///////////////////retire un article de la liste des produits
-         // console.log(idsupp)
+      function lesroidugag(idsupp){ ///////////////////retire un article de la liste des produits
          function retouràpelle(xhttp){
-            document.getElementById("réponse").innerHTML = xhttp.responseText;
-            vienchezmoi(); jhabitechez();/////ne pas faire si retour vaux 0 (tester la valeur retourner par le serveur)
-         }
+            laréponse = JSON.parse(xhttp.responseText);
+            if (laréponse.courses_liste != 0) vienchezmoi();
+            if (laréponse.courses_prods != 0) jhabitechez();         }
          AjaxContreHector("ajax_prodsupp.php?idsupp=" + idsupp, retouràpelle);
       }
 
-      function pour100briq(idédit, ligneNB){////////////gestion bouton édition de liste produits
-         console.log("édition produits id:" + idédit + " - numéro ligne tableau:" + ligneNB);
+      function pour100briq(idédit, ligneNB){ ////////////gestion bouton édition de liste produits
          larésistance(ligneNB_old);
          ligneNB_old = ligneNB;
          ligneTR = document.getElementById("tableprods").getElementsByTagName("tr")[ligneNB]
@@ -149,26 +131,20 @@
 
          nouvTR.innerHTML = form_édit;
          nouvTR.id = "formédit";
-
-         console.log("nom: " + prodNom + " - prix:" + prodPri);
       }
-      function taplusrien(){///////////toggle la div qui contien le formulaire EDit/DEL de zones
+      function taplusrien(){ ///////////toggle la div qui contien le formulaire EDit/DEL de zones
          document.getElementById("modzone").classList.toggle("madzane");
       }
 
-      function papyfaitdeux(idédit){////////envoi données édition champ de la liste des produits
+      function papyfaitdeux(idédit){ ////////envoi données édition champ de la liste des produits
          prodNom = document.getElementById("éditProd").value;
          prodPri = document.getElementById("éditPrix").value;
-         console.log(idédit, prodNom, prodPri);
          describ = encodeURIComponent(prodNom);
          hurle = "ajax_prodedit.php?idéd=" + idédit + "&desc=" + describ + "&prix=" + prodPri;
-         function retouràpelle(xhttp){
-            document.getElementById("réponse").innerHTML = xhttp.responseText; 
-            vienchezmoi(); jhabitechez();  }
-         AjaxContreHector(hurle, retouràpelle);
+         AjaxContreHector(hurle, (xhttp)=>{ if (xhttp.responseText!="0") { vienchezmoi(); jhabitechez(); } } );
       }
 
-      function larésistance(ligneNB_old){///////////////enlève la ligne du tableau avec le mini formulaire édition produit
+      function larésistance(ligneNB_old){ ///////////////enlève la ligne du tableau avec le mini formulaire édition produit
          if (document.getElementById("formédit")) {
             document.getElementById("formédit").remove();
             document.getElementById("tableprods").getElementsByTagName("tr")[ligneNB_old].classList.remove("lignédit");      }
@@ -178,7 +154,7 @@
          champétre = document.getElementById("modzone").getElementsByTagName("input");
          console.log (champétre[0].value, champétre[1].value);
          hurle = "ajax_zonajou.php?idzone=" + champétre[0].value + "&zonome=" + encodeURIComponent(champétre[1].value);
-         AjaxContreHector(hurle, (xhttp)=> { if (xhttp.responseText != "0") {zunecopine(); jhabitechez();} } )//RENDU ICI<<<<<<<<<<<<<<<<<<<<<<
+         AjaxContreHector(hurle, (xhttp)=> { if (xhttp.responseText != "0") { zunecopine(); jhabitechez(); } } )
       }
 
 
@@ -187,14 +163,15 @@
 </html>
 
 <!-- À FAIRE -->
-<!-- voir pourquoi les accents ne passe pas quand on injecte les zones via phpmyadmin -->
-<!-- implémenter la possibilité d'ajouter/supprimer pour la table courses_zones -->
 <!-- mettre des confirmations pour les DELs -->
-<!-- utiliser git -->
 <!-- mettre une option pour ajouter un article à la liste de course en même temps que dans la liste produits -->
 <!-- rajouter un champ description à la table courses_zones pour mettre dans le tooltip -->
 <!-- utiliser classlist.toggle pour déplier/replier les titres de la liste de produits -->
 
 <!-- tester les valeurs rentré quand ajou de zone: 1 <= id_zone <= 999 et qu'il existe un nom de zone, pas deux id_zone identique -->
-<!-- quand retirage d'une zone voir si on efface aussi les données corresponde dans la liste produits  -->
-<!-- créer une div debug dans un coin pour afficher les retour ajax dedans -->
+<!-- quand retirage d'une zone voir si on efface aussi les données corresponde dans la liste produits???  -->
+
+<!-- mettre une coche pour ajouter un article à la liste de course en même temps qu'à la liste des produits -->
+<!-- faire un système pour pouvoir changer la zone d'un produits en même temps que le nom et prix -->
+<!-- mettre un bouton pour effacer toute la liste de course -->
+<!-- Quand ajout nouveau produits, appuyer sur entré passe au champ suivant. -->

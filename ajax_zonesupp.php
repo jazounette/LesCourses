@@ -6,4 +6,3 @@
    $req->execute();
 
    echo $req->rowCount();
-   // echo $req->rowCount() . " ligne supprimé - id_zone:". $_GET['idsupp'] . "<br>";
