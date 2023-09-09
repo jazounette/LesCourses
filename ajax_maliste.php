@@ -11,7 +11,7 @@
    $somprx = 0;
 
    if ($rep) {
-      echo "<table>";
+      echo "<table class='tableliste'>";
       foreach ($rep as $val) {
          $somprx += $val["prix"];
          echo '<tr>';
@@ -21,7 +21,7 @@
          $euro = (isset($val["prix"])) ? "€" : "-";
          echo "<td>" . $val["describ"] . "</td>";
          echo "<td class='prix'>" . $val["prix"] . $euro . "</td>";
-         echo "<td><button onclick='mafemmesap(" . $val["id_list"] . ")'>DEL</button></td>";
+         echo "<td class='tdbout'><button onclick='mafemmesap(" . $val["id_list"] . ")'>DEL</button></td>";
          echo "</tr>";
       }
       echo "<tr><td colspan='4' style='text-align:right'>Total=" . $somprx . "€</td></tr>";

@@ -7,11 +7,11 @@
       $rep = $req->fetchAll(PDO::FETCH_ASSOC);
 
       $i=0;
-      $divsoum = '<table><tr>';
+      $divsoum = '<table class="tablesoumi"><tr>';
       $divmoud = '<table>';
       foreach ($rep as $val) {
          $divsoum .= '<td>';
-         $divsoum .= '<input title="' . $val["id_zone"] . '" class="btnsmoum" type="submit" value="' . $val["nom_zone"] . '" onclick="soumettre(' . $val["id_zone"] . ')">';
+         $divsoum .= '<input title="' . $val["id_zone"] . '" class="btnsoumi" type="submit" value="' . $val["nom_zone"] . '" onclick="soumettre(' . $val["id_zone"] . ')">';
          $divsoum .= "</td>";
          $i++;
          if ($i%3 == 0) { $divsoum .= "</tr><tr>"; }
@@ -20,7 +20,7 @@
          $divmoud .= '<td>' . $val["nom_zone"] . '</td>';
          $divmoud .= '<td><button onclick="pellerevien(' . $val["id_zone"] . ')">DEL</button></td></tr>';
       }
-      $divsoum .= "<td><input title='ajoute/supprime des zones' type='button' class='btnsmoum' onclick='taplusrien()' value='...'></td>";
+      $divsoum .= "<td><input title='ajoute/supprime des zones' type='button' class='btnsoumi' onclick='taplusrien()' value='...'></td>";
       $divsoum .= "</tr></table>";
       $divmoud .= "</table>";
       $retournage = array("amandine"=>$divsoum, "clémentine"=>$divmoud);

@@ -1,20 +1,36 @@
 body { font-family:verdana; background-color: rgb(5, 90, 5);  color: white; margin: 0; }
 table, tr, td { border: 2px solid black; border-collapse: collapse; }
-#phpversion { position:fixed; bottom: 2px; right: 11px; font-size: 0.8em; }
-#débougajeu { position:fixed; top: 0px; right: 0px; 
-            background-color: rgb(19, 28, 89); border: 1px solid white;
-            padding: 11px; border-radius: 9px; font-size: 0.8em; }
 .prodtitre {  color: black; background-color: pink; text-align: center;  }
 .prodtitre:hover { background-color: rgb(0, 221, 255); }
-.prix {  text-align: right;  }
-.btnsmoum {  width: 111px;  height: 44px;  }
-.btnzonad { width: 111px; height: 22px; }
+.prix { text-align: right; width: 55px; }
+.btnsoumi { width: 100%;  height: 44px; }
+.btnzonad { width: 111px; height: 33px; }
+.btnédito { width: 100%; }
+.btnX { width: 30px; height: 30px; }
+.survol td { padding: 11px 0 11px 0;}
 .survol:hover { background-color: rgb(0, 221, 255); color: black; }
 .lignédit { background-color: black; }
 .titrebloc { background-color: black; color:pink; text-align: center; }
 .madzane { display:none; }
 .numzone { text-align: right; }
 
+.tdbout { width: 44px; }
+.tdbout button { width: 100%; }
+.tablesoumi { table-layout: fixed; width:100%; }
+.tableprods { width: 100%; }
+.tableliste { width: 100%; }
 
+#éditProd { font-size: medium; width: 99%; }
+#éditPrix { width: 55px; text-align: right; font-size: medium; width: 99%; }
+#lycos { font-size: larger; width: 80%; }
+#réponse { width:80%; margin-left: 15%; }
+.divrech { width:80%; margin-left: 15%; }
+
+
+#phpversion { position:fixed; bottom: 2px; right: 11px; font-size: 0.8em; }
+#débougajeu { position:fixed; top: 0px; right: 0px; 
+            background-color: rgb(19, 28, 89); border: 1px solid white;
+            padding: 11px; border-radius: 9px; font-size: 0.8em; }
 /* dans ajax_mesprods, ajax_maliste, ajax_divers, ajax_lycos */
+/* commenté .debug pour passer en mode dégugage */
 .debug { display: none; }

@@ -12,7 +12,7 @@
    if ($rep) {
       // echo "<pre>"; print_r ($rep); echo "/<pre>";
       // echo "titrouvert: " . $_GET["titrouvert"] . "<br>";
-      echo "<table id='tableprods'>";
+      echo "<table id='tableprods' class='tableprods'>";
       $toto = 0;
       $ligne = 0;
       $titre = 1;
@@ -33,9 +33,9 @@
             echo "<td>" . $val["describ"] . "</td>";
             // echo "<td>" . $val["nom_zone"] . "</td>";
             echo "<td class='prix'>" . $val["prix"] . $euro . "</td>";
-            echo "<td><button onclick='lesroidugag(" . $val["id_prod"] . ")'>DEL</button></td>";//bouton effacer un produits
-            echo "<td><button onclick='pour100briq(" . $val["id_prod"] . ", " . $ligne . ")'>ÉDiT</button></td>";//bouton éditer un produits
-            echo "<td><button onclick='yarienàvoir(" . $val["id_prod"] . ")'>ADD</button></td>";//bouton ajouter un article à la liste de course
+            echo "<td class='tdbout'><button onclick='lesroidugag(" . $val["id_prod"] . ")'>DEL</button></td>";//bouton effacer un produits
+            echo "<td class='tdbout'><button onclick='pour100briq(" . $val["id_prod"] . ", " . $ligne . ")'>ÉDiT</button></td>";//bouton éditer un produits
+            echo "<td class='tdbout'><button onclick='yarienàvoir(" . $val["id_prod"] . ")'>ADD</button></td>";//bouton ajouter un article à la liste de course
             echo "<td class='debug'>" . $val["id_prod"] . "</td>";
             echo "</tr>";
             $ligne++;
