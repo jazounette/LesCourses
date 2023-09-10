@@ -27,7 +27,7 @@
          }
          if ($feuvert) {
             $euro = (isset($val["prix"])) ? "€" : "-";
-            echo '<tr>';
+            echo '<tr class="prodligne">';
             // echo "<td>" . $val["id_zone"] . "</td>";
             // echo "<td>" . $val["zone"] . "</td>";
             echo "<td>" . $val["describ"] . "</td>";

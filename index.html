@@ -8,7 +8,7 @@
    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-   <div class="container">
+   <div class="container-fluid">
       <div class="row">
          <div class="col-lg">
             <p class="titrebloc">LISTE DE COURSES</p>
@@ -23,14 +23,14 @@
          <div class="col-lg">
             <p class="titrebloc">AJOUTER UN ARTICLE</p>
             <form id="refajou">
-               <!-- <label for="fname">First name:</label><br> -->
                <input type="text" name="desc" maxlength="33" placeholder="DESCRIPTION">
                <input type="text" name="prix" placeholder="PRIX"><br><br>
                <div id="soumission"></div>  <!-- contient les bouttons submit après traitement PHP> -->
             </form>
+            <br>
             <div id="modzone" class="madzane">
-               <input type="text" placeholder="NUMÉRO DE ZONE" class="numzone">
-               <input type="text" placeholder="NOM DE LA ZONE"><br>
+               <input type="text" placeholder="N° ZONE" class="numzone">
+               <input type="text" placeholder="NOM DE LA ZONE">
                <button class="btnzonad" onclick="leGrandBlond()">ADD</button><br>
                <div id="leszonedel"></div>
             </div>

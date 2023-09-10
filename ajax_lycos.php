@@ -8,7 +8,7 @@
    // $req = $db->query("select * from courses_prods where descrip like '%o%';");
    // $rep = $req->fetchAll(PDO::FETCH_ASSOC);
    if ($rep) {
-      echo "<table>";
+      echo "<table class='tablelycos'>";
       foreach ($rep as $val) {
          $euro = (isset($val["prix"])) ? "€" : "-";
          echo '<tr class="survol" onclick="yarienàvoir(' .$val["id_prod"] . ')">';
