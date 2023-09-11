@@ -21,12 +21,15 @@
          $divmoud .= '<td>' . $val["nom_zone"] . '</td>';
          $divmoud .= '<td><button onclick="pellerevien(' . $val["id_zone"] . ')">DEL</button></td></tr>';
 
-         $tdzones .= '<div><input type="radio" name="zone" value="' . $val["id_zone"] . '">' . $val["nom_zone"] . '</div>';
+         $tdzones .= '<div onclick="surligne()">';
+         $tdzones .= '<input type="radio" name="zone" id="zone' . $val["id_zone"] . '" value="' . $val["id_zone"] . '">';
+         $tdzones .= '<label for="zone' . $val["id_zone"] . '">' . $val["nom_zone"] . '</label></div>';
       }
       $divsoum .= "<td><input title='ajoute/supprime des zones' type='button' class='btnsoumi' onclick='taplusrien()' value='...'></td>";
-      $divsoum .= "</tr></table>";
-      $divsoum .= "<div><input type='checkbox' id='ajoutauto' checked>";
+      $divsoum .= "</tr></table><br>";
+      $divsoum .= "<div class='surligne' style='padding-bottom: 3px'><input type='checkbox' id='ajoutauto' checked>";
       $divsoum .= "<label for='ajoutauto'>Ajoute en même temps à la liste de courses.</label></div>";
+
       $divmoud .= "</table>";
       $tdzones .= "</td>";
       $retournage = array("amandine"=>$divsoum, "clémentine"=>$divmoud, "orangine"=>$tdzones);

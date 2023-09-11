@@ -50,6 +50,7 @@
       window.addEventListener("load", jhabitechez);
       window.addEventListener("load", zunecopine);
       document.getElementById("refajou").addEventListener("submit", pinosimple); //////traitement formulaire nouveau produits
+
       var cestlazone = 0;
       var ligneNB_old = 0; //sauvegarde la position de la ligne en cours d'édition
       var titrouvert = 0; //l'indice du titre de la liste des produits qui est déplié
@@ -63,6 +64,12 @@
          document.getElementById("lycos").value = ""; 
          document.getElementById("refajou").getElementsByTagName("input")["desc"].value = "";
          document.getElementById("réponse").innerHTML = "";     }
+      function surligne(){
+         inList = document.getElementById("formradi").getElementsByTagName("input");
+         for (i=0; i<inList.length; i++) {
+            if (inList[i].checked == true) inList[i].parentElement.classList.add("surligne"); 
+            else inList[i].parentElement.classList.remove("surligne");     }
+      }
 
       function AjaxContreHector(hurle, retouràpelle){ ///////////////////AJAX///////////////////
          const xhttp = new XMLHttpRequest();
@@ -169,8 +176,12 @@
 
          nouvTRbis.innerHTML = form_rad;
          nouvTRbis.id = "formradi";
-         ligneIN = document.getElementById("formradi").getElementsByTagName("td")[0].getElementsByTagName("input");
-         for (i=0; i<ligneIN.length; i++) if (ligneIN[i].value == zone) { ligneIN[i].checked = true; break; }
+         ligneIN = document.getElementById("formradi").getElementsByTagName("input");
+         for (i=0; i<ligneIN.length; i++) 
+            if (ligneIN[i].value == zone) { 
+               ligneIN[i].checked = true; 
+               ligneIN[i].parentElement.classList.add("surligne"); 
+               break; }
       }
       function taplusrien(){ ///////////toggle la div qui contien le formulaire EDit/DEL de zones
          document.getElementById("modzone").classList.toggle("madzane");
@@ -179,7 +190,7 @@
       function papyfaitdeux(idédit){ ////////envoi données édition champ de la liste des produits
          prodNom = document.getElementById("éditProd").value;
          prodPri = document.getElementById("éditPrix").value;
-         zoneID = getZoneID = document.querySelector('input[name="zone"]:checked').value;
+         zoneID = document.querySelector('input[name="zone"]:checked').value;
          titrouvert = zoneID;
          describ = encodeURIComponent(prodNom);
          hurle = "ajax_prodedit.php?idéd=" + idédit + "&desc=" + describ + "&prix=" + prodPri + "&zone=" + zoneID;
