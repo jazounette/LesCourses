@@ -24,8 +24,7 @@
          echo "<td class='tdbout'><button onclick='mafemmesap(" . $val["id_list"] . ")'>DEL</button></td>";
          echo "</tr>";
       }
-      echo "<tr><td colspan='3' style='text-align:right'>Total=" . $somprx . "€</td></tr>";
-      echo "<tr><td colspan='3' style='text-align:right'>" . $req->rowCount() . $nompro[$nomrnd] . "</td></tr>";
+      echo "<tr><td colspan='2' style='text-align:right'>" . $req->rowCount() . $nompro[$nomrnd] . " / TOTAL=" . $somprx . "€</td><td></td></tr>";
       echo "</table>";
    } else {
       echo "<p>La liste de courses est vide</p>";

@@ -50,9 +50,10 @@
       window.addEventListener("load", jhabitechez);
       window.addEventListener("load", zunecopine);
       document.getElementById("refajou").addEventListener("submit", pinosimple); //////traitement formulaire nouveau produits
-      var cestlazone=0;
-      var ligneNB_old=0;//sauvegarde la position de la ligne en cours d'édition
-      var titrouvert=1;//l'indice du titre de la liste des produits qui est déplié
+      var cestlazone = 0;
+      var ligneNB_old = 0; //sauvegarde la position de la ligne en cours d'édition
+      var titrouvert = 0; //l'indice du titre de la liste des produits qui est déplié
+      var form_rad = ""; //contient les boutons radio de édit article
 
       AjaxContreHector("ajax_divers.php?faire=version", (xhttp)=> document.getElementById("phpversion").innerHTML = xhttp.responseText  );
 
@@ -86,51 +87,66 @@
 
       function yarienàvoir(idajou){ ////////////////////ajoute un article à la liste des courses
          document.getElementById("lycos").value = "";
-         AjaxContreHector("ajax_listajou.php?idajou=" + idajou, (xhttp)=> { if (xhttp.responseText != "0") vienchezmoi(); });
+         AjaxContreHector("ajax_listajou.php?idajou=" + idajou, (xhttp)=> { if (xhttp.responseText > 0) vienchezmoi(); });
       }
       function mafemmesap(idsupp){ ///////////////////////efface article de la liste des courses
-         AjaxContreHector("ajax_listsupp.php?idsupp=" + idsupp, (xhttp)=> {if (xhttp.responseText != "0") vienchezmoi();} );
+         AjaxContreHector("ajax_listsupp.php?idsupp=" + idsupp, (xhttp)=> {if (xhttp.responseText > 0) vienchezmoi();} );
       }
       function pellerevien(idsupp){ ////////////////////////enléve une zone de la base de donnée
-         function retouràpelle(xhttp) { if (xhttp.responseText != "0") { zunecopine(); jhabitechez(); } }
+         function retouràpelle(xhttp) { if (xhttp.responseText > 0) { zunecopine(); jhabitechez(); } }
          AjaxContreHector("ajax_zonesupp.php?idsupp=" + idsupp, retouràpelle);
       }
 
       function vienchezmoi(){ //////////////////////////////////////affiche la liste des courses
+         console.log("affichage liste des courses");
          function chauliste(xhttp){  document.getElementById("maliste").innerHTML = xhttp.responseText;  }
          AjaxContreHector("ajax_maliste.php", chauliste);
       }
       function jhabitechez(){ /////////////////////////////////////affiche la liste des produits
+         console.log("affichage liste produits");
          function chauliste(xhttp){  document.getElementById("mesprods").innerHTML = xhttp.responseText;  }
          AjaxContreHector("ajax_mesprods.php?titrouvert=" + titrouvert, chauliste);
       }
       function zunecopine(){ ///////////////////////////////////////affiche le clavier des zones
+         console.log("affichage du clavier des zones");
          function chauliste(xhttp) {
             laréponse = JSON.parse(xhttp.responseText);
             document.getElementById("soumission").innerHTML = laréponse.amandine;
-            document.getElementById("leszonedel").innerHTML = laréponse.clémentine;         }
+            document.getElementById("leszonedel").innerHTML = laréponse.clémentine;
+            form_rad = laréponse.orangine;         }
          AjaxContreHector("ajax_divers.php?faire=soumiss", chauliste);
       }
 
       function pinosimple(e){ /////////////////////////ajoute un article à la liste des produits
+         // console.log ((document.getElementById("ajoutauto").checked) ? "coché" : "PASCOCHÉ" )
          e.preventDefault();
          var données = new FormData(this);
          titi = document.getElementById("refajou").getElementsByTagName("input");
          titi["desc"].value = "";   titi["prix"].value = "";
          describ = encodeURIComponent(données.get("desc"));/////change le & en %26
          hurle = "ajax_prodajou.php?desc=" + describ + "&zone=" + cestlazone + "&prix=" + données.get("prix");
-         AjaxContreHector(hurle, (xhttp)=> { if (xhttp.responseText !="0") jhabitechez(); });
+         function retouràpelle(xhttp) {
+            laréponse = JSON.parse(xhttp.responseText);
+            // console.log (">>>>>>" + xhttp.responseText);
+            // console.log (laréponse.rowCount);
+            // console.log (laréponse.lastID);
+            if (laréponse.rowCount > 0) { 
+               titrouvert = cestlazone;
+               jhabitechez(); 
+               if (document.getElementById("ajoutauto").checked) yarienàvoir(laréponse.lastID);      }
+         }
+         AjaxContreHector(hurle, retouràpelle);
       }
 
       function lesroidugag(idsupp){ ///////////////////retire un article de la liste des produits
          function retouràpelle(xhttp){
             laréponse = JSON.parse(xhttp.responseText);
-            if (laréponse.courses_liste != 0) vienchezmoi();
-            if (laréponse.courses_prods != 0) jhabitechez();         }
+            if (laréponse.courses_liste > 0) vienchezmoi();
+            if (laréponse.courses_prods > 0) jhabitechez();         }
          AjaxContreHector("ajax_prodsupp.php?idsupp=" + idsupp, retouràpelle);
       }
 
-      function pour100briq(idédit, ligneNB){ ////////////gestion bouton édition de liste produits
+      function pour100briq(idédit, zone, ligneNB){ ////////////gestion bouton édition de liste produits
          larésistance(ligneNB_old);
          ligneNB_old = ligneNB;
          ligneTR = document.getElementById("tableprods").getElementsByTagName("tr")[ligneNB]
@@ -138,15 +154,23 @@
          prodNom = ligneTD[0].innerText;///le nom du produit doit être dans la première case de la ligne du tableau
          prodPri = ligneTD[1].innerText;///idem pour le prix, il doit être dans la deuxième case
          ligneTR.classList.add("lignédit");
+
+         nouvTRbis = document.createElement("tr");//nouvTRbis insérer avant pour l'avoir après :o)
+         ligneTR.insertAdjacentElement("afterend", nouvTRbis);
          nouvTR = document.createElement("tr");
          ligneTR.insertAdjacentElement("afterend", nouvTR);
-         form_édit = "<td><input id='éditProd' value='" + prodNom + "' type='text'></td>";
+
+         form_édit = '<td><input id="éditProd" value="' + prodNom + '" type="text"></td>';
          form_édit += "<td><input id='éditPrix' value='" + prodPri + "' type='text'></td>";
          form_édit += "<td><button class='btnédito' onclick='papyfaitdeux(" + idédit + ")'>OK</button></td>";
          form_édit += "<td colspan='2'><button class='btnédito' onclick='larésistance(" + ligneNB + ")'>CANCEL</button></td>";
-
          nouvTR.innerHTML = form_édit;
          nouvTR.id = "formédit";
+
+         nouvTRbis.innerHTML = form_rad;
+         nouvTRbis.id = "formradi";
+         ligneIN = document.getElementById("formradi").getElementsByTagName("td")[0].getElementsByTagName("input");
+         for (i=0; i<ligneIN.length; i++) if (ligneIN[i].value == zone) { ligneIN[i].checked = true; break; }
       }
       function taplusrien(){ ///////////toggle la div qui contien le formulaire EDit/DEL de zones
          document.getElementById("modzone").classList.toggle("madzane");
@@ -155,22 +179,25 @@
       function papyfaitdeux(idédit){ ////////envoi données édition champ de la liste des produits
          prodNom = document.getElementById("éditProd").value;
          prodPri = document.getElementById("éditPrix").value;
+         zoneID = getZoneID = document.querySelector('input[name="zone"]:checked').value;
+         titrouvert = zoneID;
          describ = encodeURIComponent(prodNom);
-         hurle = "ajax_prodedit.php?idéd=" + idédit + "&desc=" + describ + "&prix=" + prodPri;
+         hurle = "ajax_prodedit.php?idéd=" + idédit + "&desc=" + describ + "&prix=" + prodPri + "&zone=" + zoneID;
          AjaxContreHector(hurle, (xhttp)=>{ if (xhttp.responseText!="0") { vienchezmoi(); jhabitechez(); } } );
       }
 
       function larésistance(ligneNB_old){ ///////////////enlève la ligne du tableau avec le mini formulaire édition produit
          if (document.getElementById("formédit")) {
             document.getElementById("formédit").remove();
+            document.getElementById("formradi").remove();
             document.getElementById("tableprods").getElementsByTagName("tr")[ligneNB_old].classList.remove("lignédit");      }
       }
 
       function leGrandBlond(){ //////////////////////////////////////////////////ajoute une zone
          champétre = document.getElementById("modzone").getElementsByTagName("input");
-         console.log (champétre[0].value, champétre[1].value);
+         // console.log (champétre[0].value, champétre[1].value);
          hurle = "ajax_zonajou.php?idzone=" + champétre[0].value + "&zonome=" + encodeURIComponent(champétre[1].value);
-         AjaxContreHector(hurle, (xhttp)=> { if (xhttp.responseText != "0") { zunecopine(); jhabitechez(); } } )
+         AjaxContreHector(hurle, (xhttp)=> { if (xhttp.responseText > 0) { zunecopine(); jhabitechez(); } } )
       }
 
 

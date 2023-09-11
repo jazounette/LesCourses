@@ -7,4 +7,10 @@
    $prixConv = floatval($_GET['prix']);
    if ($prixConv) {  $req->bindValue(3, $prixConv);  } else {  $req->bindValue(3, NULL);  }
    $req->execute();
-   echo $req->rowCount();
+   $poirine = $req->rowCount();
+
+   $req = $db->query("select last_insert_id();");
+   $patatine = $req->fetch()[0];
+
+   $retournage = array("rowCount"=>$poirine, "lastID"=>$patatine);
+   echo json_encode($retournage);

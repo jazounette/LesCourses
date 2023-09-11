@@ -4,7 +4,7 @@ USE `lescourses`;
 CREATE TABLE `courses_prods` (
    `id_prod`   INT NOT NULL AUTO_INCREMENT,
    `zone`		INT,
-   `describ`	VARCHAR(33),
+   `describ`	VARCHAR(33) COLLATE UTF8_GENERAL_CI,
    `prix`		FLOAT,
    PRIMARY KEY (`id_prod`)
 );
