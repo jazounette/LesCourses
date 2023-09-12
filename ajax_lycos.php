@@ -5,8 +5,6 @@
    $req->execute();
    $rep = $req->fetchAll(PDO::FETCH_ASSOC);
 
-   // $req = $db->query("select * from courses_prods where descrip like '%o%';");
-   // $rep = $req->fetchAll(PDO::FETCH_ASSOC);
    if ($rep) {
       echo "<table class='tablelycos'>";
       foreach ($rep as $val) {

@@ -15,17 +15,16 @@
       foreach ($rep as $val) {
          if ($toto < $val["zone"]) {
             $toto = $val["zone"];
-            echo "<tr class='prodtitre' onclick='ouverture(" . $val["zone"] . ")'><td colspan='5'>" . $val["nom_zone"] . "</td></tr>";
+            echo "<tr class='prodtitre' onclick='ouverture(" . $val["zone"] . ")'>";
+            echo "<td colspan='5'><span class='colprod' style='background-color: #" . $val["couleur"] . "'>" . $val["nom_zone"];
+            echo "</span></td></tr>";
             $ligne++;
             $feuvert = ($val["zone"] == $_GET["titrouvert"]) ? TRUE : FALSE;
          }
          if ($feuvert) {
             $euro = (isset($val["prix"])) ? "€" : "-";
             echo '<tr class="prodligne">';
-            // echo "<td>" . $val["id_zone"] . "</td>";
-            // echo "<td>" . $val["zone"] . "</td>";
             echo "<td>" . $val["describ"] . "</td>";
-            // echo "<td>" . $val["nom_zone"] . "</td>";
             echo "<td class='prix'>" . $val["prix"] . $euro . "</td>";
             echo "<td class='tdbout'><button onclick='lesroidugag(" . $val["id_prod"] . ")'>DEL</button></td>";//bouton effacer un produits
             echo "<td class='tdbout'><button onclick='pour100briq(" . $val["id_prod"] . ", " . $val["zone"] . ", " . $ligne . ")'>ÉDiT</button></td>";//bouton éditer un produits

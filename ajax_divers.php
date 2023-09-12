@@ -8,16 +8,15 @@
 
       $i=0;
       $divsoum = '<table class="tablesoumi"><tr>'; // la liste des boutons sumit du formulaire ajout d'article
-      $divmoud = '<table>';// la liste des zones avec le bonton éffacer dans la zone édition de zone
+      $divmoud = '<table class="suppzone">';// la liste des zones avec le bonton éffacer dans la zone édition de zone
       $tdzones = '<td colspan="5">'; // contient la liste des zones sous forme de bouton radio
       foreach ($rep as $val) {
-         $divsoum .= '<td>';
-         $divsoum .= '<input title="' . $val["id_zone"] . '" class="btnsoumi" type="submit" value="' . $val["nom_zone"] . '" onclick="soumettre(' . $val["id_zone"] . ')">';
-         $divsoum .= "</td>";
+         $divsoum .= '<td><input title="' . $val["id_zone"] . '" class="btnsoumi" type="submit" ';
+         $divsoum .= 'value="' . $val["nom_zone"] . '" onclick="soumettre(' . $val["id_zone"] . ')"></td>';
          $i++;
          if ($i%3 == 0) { $divsoum .= "</tr><tr>"; }
 
-         $divmoud .= '<tr><td>' . $val["id_zone"] . '</td>';
+         $divmoud .= '<tr><td style="background-color:#' . $val["couleur"] . '">' . $val["id_zone"] . '</td>';
          $divmoud .= '<td>' . $val["nom_zone"] . '</td>';
          $divmoud .= '<td><button onclick="pellerevien(' . $val["id_zone"] . ')">DEL</button></td></tr>';
 

@@ -17,8 +17,10 @@ CREATE TABLE `courses_liste` (
 );
 
 CREATE TABLE `courses_zones` (
-   `id_zone`      INT,
-   `nom_zone`     VARCHAR(33)
+   `id_zone`      INT NOT NULL,
+   `nom_zone`     VARCHAR(33),
+   `couleur`      CHAR(6),
+   PRIMARY KEY (`id_zone`)
 );
 
 INSERT INTO `courses_prods` VALUES 
@@ -42,19 +44,19 @@ INSERT INTO `courses_prods` VALUES
    ( NULL, 900, "frittes", 6.66 );
 
 INSERT INTO `courses_zones` VALUES
-   ( 100, "ÉpicerieA"),
-   ( 150, "ÉpicerieB"),
-   ( 200, "ÉpicerieC"),
-   ( 300, "Boissons"),
-   ( 400, "Boucherie"),
-   ( 500, "Fruits & Légumes"),
-   ( 550, "Boulangerie"),
-   ( 600, "Crémerie"),
-   ( 650, "Produits Frais Lib Serv"),
-   ( 700, "Hygiène"),
-   ( 800, "Entretien"),
-   ( 900, "Surgelés"),
-   ( 999, "Divers");
+   ( 100, "ÉpicerieA", "ff0000"),
+   ( 150, "ÉpicerieB", "00ff00"),
+   ( 200, "ÉpicerieC", "0000ff"),
+   ( 300, "Boissons", "ff00ff"),
+   ( 400, "Boucherie", "00ffff"),
+   ( 500, "Fruits & Légumes", "ffff00"),
+   ( 550, "Boulangerie", "888888"),
+   ( 600, "Crémerie", "880088"),
+   ( 650, "Produits Frais Lib Serv", "000088"),
+   ( 700, "Hygiène", "880000"),
+   ( 800, "Entretien", "008800"),
+   ( 900, "Surgelés", "88ff00"),
+   ( 999, "Divers", "ff88ff");
 
 --100    épicerieA   farine, nes, prince, confiture
 --150    épicerieB   choco, madeilene

@@ -1,5 +1,5 @@
 body { font-family:verdana; background-color: rgb(3, 90, 26);  color: white; margin: 0; }
-.prodtitre { color: black; background-color: pink; text-align: center; border-top: 2px solid white; }
+.prodtitre { color: white; background-color: pink; text-align: center; border-top: 2px solid white; }
 .prodtitre td { padding: 5px; }
 .prodtitre:hover { background-color: rgb(0, 221, 255); }
 .prodligne:nth-child(odd) { background-color: green; }
@@ -15,7 +15,7 @@ body { font-family:verdana; background-color: rgb(3, 90, 26);  color: white; mar
 #formradi { background-color: black; font-size: small; }
 #formradi td div { display: inline-block; width: 25%; white-space: nowrap; overflow: hidden; }
 .surligne { background-color: white; color: black; border-radius: 15px; }
-.titrebloc { background-color: black; color:pink; text-align: center; margin-left: -15px; margin-right: -15px; }
+.titrebloc { background-color: black; color:pink; text-align: center; margin-left: -12px; margin-right: -12px; }
 .madzane { display:none; }
 .numzone { text-align: right; }
 #ajoutauto { transform: scale(1.6); margin: 0 11px 0 11px; }
@@ -25,12 +25,17 @@ body { font-family:verdana; background-color: rgb(3, 90, 26);  color: white; mar
 .tablesoumi { table-layout: fixed; width:100%; }
 .tableprods { width: 100%; border-collapse: collapse; }
 .tableprods tr:nth-child(1) { border-top: 0; }
-.tableliste { width:100%; border-collapse: collapse; }
+
+.tableliste { width:100%; height: 1px; border-collapse: collapse; }
 .tableliste tr:nth-child(odd) { background-color: green; }
 .tableliste tr:nth-last-child(1) { border-top: 2px solid black; background-color: darkred; }
+.tableliste tr td { height:100%; }
+
 .tablelycos { width: 100%; background-color: white; color: black; border-collapse: collapse; }
 #mesprods { border: 2px solid black; border-radius: 15px; overflow: hidden; }
 #maliste { border: 2px solid black; border-radius: 5px; overflow: hidden; }
+.suppzone { border: 2px solid black; border-radius: 5px; overflow: hidden; }
+.suppzone tr:nth-child(odd) { background-color: green; }
 
 #éditProd { font-size: medium; width: 99%; }
 #éditPrix { width: 55px; text-align: right; font-size: medium; width: 99%; }
@@ -42,11 +47,13 @@ body { font-family:verdana; background-color: rgb(3, 90, 26);  color: white; mar
 #refajou>input:nth-child(1) { width: 66%; }
 #refajou>input:nth-child(2) { width: 32%; text-align: right; }
 #modzone>input { font-size: larger; }
-#modzone>input:nth-child(1) { width: 20%; }
-#modzone>input:nth-child(2) { width: 61%; }
+#modzone>input:nth-child(1) { width: 8%; }
+#modzone>input:nth-child(2) { width: 20%; }
+#modzone>input:nth-child(3) { width: 53%; }
 
 .surjaune { background-color: yellowgreen; color: black; border-radius: 0 9px 9px 0; padding-right: 11px; }
-
+.coliste { width: 12px; height: 108%; margin: -5px 0 -5px -5px; }
+.colprod { padding: 5px; border-radius: 11px; }
 
 #phpversion { position:fixed; bottom: 2px; right: 11px; font-size: 0.8em; }
 #débougajeu { position:fixed; top: 0px; right: 0px; 
