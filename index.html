@@ -61,9 +61,14 @@
       function soumettre(toto){  cestlazone = toto;  }
       function ouverture(toto){  titrouvert = toto; jhabitechez();  }
       function cleanLycos(){
+         cleanSurMaliste();
          document.getElementById("lycos").value = ""; 
          document.getElementById("refajou").getElementsByTagName("input")["desc"].value = "";
          document.getElementById("réponse").innerHTML = "";     }
+      function cleanSurMaliste(){////////vire les surlignages jaune dans la liste de courses
+         tabTR = document.getElementById("maliste").getElementsByTagName("tr");
+         for (i=0; i<(tabTR.length-1); i++) {   tabTR[i].getElementsByTagName("span")[0].classList.remove("surjaune");  }
+      }
       function surligne(){
          inList = document.getElementById("formradi").getElementsByTagName("input");
          for (i=0; i<inList.length; i++) {
@@ -85,7 +90,13 @@
          valLycos = document.getElementById("lycos").value;
          innerRép = document.getElementById("réponse");
          document.getElementById("refajou").getElementsByTagName("input")[0].value = valLycos;
+         cleanSurMaliste();
          if (valLycos.length >= 3) {
+            for (i=0; i<(tabTR.length-1); i++){
+               tabSPAN = tabTR[i].getElementsByTagName("span");
+               toto = tabSPAN[0].innerText.toLowerCase();
+               toto = toto.normalize("NFD").replace(/[\u0300-\u036f]/g, "");//magie voodoo qui vire les accents
+               if (toto.includes(valLycos)) tabSPAN[0].classList.add("surjaune");     }
             function resulycos(xhttp){  innerRép.innerHTML = xhttp.responseText;  }
             valLycos = encodeURIComponent(valLycos);
             AjaxContreHector("ajax_lycos.php?cherche=" + valLycos, resulycos);
@@ -218,15 +229,11 @@
 
 <!-- À FAIRE -->
 <!-- mettre des confirmations pour les DELs -->
-<!-- mettre une option pour ajouter un article à la liste de course en même temps que dans la liste produits -->
 <!-- rajouter un champ description à la table courses_zones pour mettre dans le tooltip -->
 <!-- utiliser classlist.toggle pour déplier/replier les titres de la liste de produits -->
 
 <!-- tester les valeurs rentré quand ajou de zone: 1 <= id_zone <= 999 et qu'il existe un nom de zone, pas deux id_zone identique -->
 <!-- quand retirage d'une zone voir si on efface aussi les données corresponde dans la liste produits???  -->
 
-<!-- mettre une coche pour ajouter un article à la liste de course en même temps qu'à la liste des produits -->
-<!-- faire un système pour pouvoir changer la zone d'un produits en même temps que le nom et prix -->
 <!-- mettre un bouton pour effacer toute la liste de course -->
 <!-- Quand ajout nouveau produits, appuyer sur entré passe au champ suivant. -->
-<!-- faire du caseINsencitive pour la recherche Lycos sur serveur free -->

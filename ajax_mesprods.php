@@ -5,13 +5,9 @@
    $quékette .= "where courses_prods.zone = courses_zones.id_zone ";
    $quékette .= "order by zone, describ;";
    $req = $db->query($quékette);
-   // $req = $db->query("select * from courses_prods join courses_zones where courses_prods.zone = courses_zones.id_zone order by zone;");
-   //select * from courses_liste join courses_prods where courses_liste.id_prod = courses_prods.id_prod;
    $rep = $req->fetchAll(PDO::FETCH_ASSOC);
 
    if ($rep) {
-      // echo "<pre>"; print_r ($rep); echo "/<pre>";
-      // echo "titrouvert: " . $_GET["titrouvert"] . "<br>";
       echo "<table id='tableprods' class='tableprods'>";
       $toto = 0;
       $ligne = 0;

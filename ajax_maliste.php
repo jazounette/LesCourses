@@ -19,7 +19,7 @@
          echo "<td class='debug'>" . $val["id_prod"] . "</td>";
          echo "<td class='debug'>" . $val["zone"] . "</td>";
          $euro = (isset($val["prix"])) ? "€" : "-";
-         echo "<td>" . $val["describ"] . "</td>";
+         echo "<td><span>" . $val["describ"] . "</span></td>";
          echo "<td class='prix'>" . $val["prix"] . $euro . "</td>";
          echo "<td class='tdbout'><button onclick='mafemmesap(" . $val["id_list"] . ")'>DEL</button></td>";
          echo "</tr>";

@@ -1,5 +1,5 @@
 body { font-family:verdana; background-color: rgb(3, 90, 26);  color: white; margin: 0; }
-.prodtitre {  color: black; background-color: pink; text-align: center; border-top: 2px solid white; }
+.prodtitre { color: black; background-color: pink; text-align: center; border-top: 2px solid white; }
 .prodtitre td { padding: 5px; }
 .prodtitre:hover { background-color: rgb(0, 221, 255); }
 .prodligne:nth-child(odd) { background-color: green; }
@@ -13,7 +13,7 @@ body { font-family:verdana; background-color: rgb(3, 90, 26);  color: white; mar
 .lignédit>td { background-color: black; }
 #formédit { background-color: black; }
 #formradi { background-color: black; font-size: small; }
-#formradi td div {  display: inline-block; width: 25%; white-space: nowrap; overflow: hidden; }
+#formradi td div { display: inline-block; width: 25%; white-space: nowrap; overflow: hidden; }
 .surligne { background-color: white; color: black; border-radius: 15px; }
 .titrebloc { background-color: black; color:pink; text-align: center; margin-left: -15px; margin-right: -15px; }
 .madzane { display:none; }
@@ -44,6 +44,8 @@ body { font-family:verdana; background-color: rgb(3, 90, 26);  color: white; mar
 #modzone>input { font-size: larger; }
 #modzone>input:nth-child(1) { width: 20%; }
 #modzone>input:nth-child(2) { width: 61%; }
+
+.surjaune { background-color: yellowgreen; color: black; border-radius: 0 9px 9px 0; padding-right: 11px; }
 
 
 #phpversion { position:fixed; bottom: 2px; right: 11px; font-size: 0.8em; }
