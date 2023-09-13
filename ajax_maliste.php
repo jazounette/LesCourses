@@ -5,7 +5,7 @@
    // $quékette .= "where courses_liste.id_prod = courses_prods.id_prod ";
    // $quékette .= "order by courses_prods.zone, courses_prods.describ;";
 
-   $quékette = "select id_list, describ, prix, couleur from courses_liste ";
+   $quékette = "select id_list, describ, prix, coulbck from courses_liste ";
    $quékette .= "join courses_prods ";
    $quékette .= "on courses_liste.id_prod = courses_prods.id_prod ";
    $quékette .= "join courses_zones ";
@@ -27,10 +27,11 @@
          // echo "<td class='debug'>" . $val["id_list"] . "</td>";
          // echo "<td class='debug'>" . $val["id_prod"] . "</td>";
          // echo "<td class='debug'>" . $val["zone"] . "</td>";
-         echo "<td><div class='coliste' style='background-color: #" . $val["couleur"] . "'></div></td>";
-         $euro = (isset($val["prix"])) ? "€" : "-";
+         echo "<td><div class='coliste' style='background-color: #" . $val["coulbck"] . "'></div></td>";
+         if (isset($val["prix"])) { $euro = "€"; $laclasse = "prix"; }
+            else { $euro = "-"; $laclasse = "pasprix"; }
          echo "<td><span>" . $val["describ"] . "</span></td>";
-         echo "<td class='prix'>" . $val["prix"] . $euro . "</td>";
+         echo "<td class='" . $laclasse . "'>" . $val["prix"] . $euro . "</td>";
          echo "<td class='tdbout'><button onclick='mafemmesap(" . $val["id_list"] . ")'>DEL</button></td>";
          echo "</tr>";
       }

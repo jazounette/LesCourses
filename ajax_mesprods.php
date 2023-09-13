@@ -16,16 +16,18 @@
          if ($toto < $val["zone"]) {
             $toto = $val["zone"];
             echo "<tr class='prodtitre' onclick='ouverture(" . $val["zone"] . ")'>";
-            echo "<td colspan='5'><span class='colprod' style='background-color: #" . $val["couleur"] . "'>" . $val["nom_zone"];
+            echo "<td colspan='5'>";
+            echo "<span class='colprod' style='background-color: #" . $val["coulbck"] . "; color:#" . $val["coultxt"] . "'>" . $val["nom_zone"];
             echo "</span></td></tr>";
             $ligne++;
             $feuvert = ($val["zone"] == $_GET["titrouvert"]) ? TRUE : FALSE;
          }
          if ($feuvert) {
-            $euro = (isset($val["prix"])) ? "€" : "-";
+            if (isset($val["prix"])) { $euro = "€"; $laclasse = "prix"; }
+               else { $euro = "-"; $laclasse = "pasprix"; }
             echo '<tr class="prodligne">';
             echo "<td>" . $val["describ"] . "</td>";
-            echo "<td class='prix'>" . $val["prix"] . $euro . "</td>";
+            echo "<td class='" . $laclasse . "'>" . $val["prix"] . $euro . "</td>";
             echo "<td class='tdbout'><button onclick='lesroidugag(" . $val["id_prod"] . ")'>DEL</button></td>";//bouton effacer un produits
             echo "<td class='tdbout'><button onclick='pour100briq(" . $val["id_prod"] . ", " . $val["zone"] . ", " . $ligne . ")'>ÉDiT</button></td>";//bouton éditer un produits
             echo "<td class='tdbout'><button onclick='yarienàvoir(" . $val["id_prod"] . ")'>ADD</button></td>";//bouton ajouter un article à la liste de course

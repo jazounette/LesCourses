@@ -18,8 +18,9 @@ CREATE TABLE `courses_liste` (
 
 CREATE TABLE `courses_zones` (
    `id_zone`      INT NOT NULL,
-   `nom_zone`     VARCHAR(33),
-   `couleur`      CHAR(6),
+   `nom_zone`     VARCHAR(33) COLLATE UTF8_GENERAL_CI,
+   `coulbck`      CHAR(6),
+   `coultxt`      CHAR(6),
    PRIMARY KEY (`id_zone`)
 );
 
@@ -44,19 +45,19 @@ INSERT INTO `courses_prods` VALUES
    ( NULL, 900, "frittes", 6.66 );
 
 INSERT INTO `courses_zones` VALUES
-   ( 100, "ÉpicerieA", "ff0000"),
-   ( 150, "ÉpicerieB", "00ff00"),
-   ( 200, "ÉpicerieC", "0000ff"),
-   ( 300, "Boissons", "ff00ff"),
-   ( 400, "Boucherie", "00ffff"),
-   ( 500, "Fruits & Légumes", "ffff00"),
-   ( 550, "Boulangerie", "888888"),
-   ( 600, "Crémerie", "880088"),
-   ( 650, "Produits Frais Lib Serv", "000088"),
-   ( 700, "Hygiène", "880000"),
-   ( 800, "Entretien", "008800"),
-   ( 900, "Surgelés", "88ff00"),
-   ( 999, "Divers", "ff88ff");
+   ( 100, "ÉpicerieA", "000088", "ffff00"),
+   ( 150, "ÉpicerieB", "000088", "ffff00"),
+   ( 200, "ÉpicerieC", "000088", "ffff00"),
+   ( 300, "Boissons", "00ff00", "000000"),
+   ( 400, "Boucherie", "ff0000", "ffffff"),
+   ( 500, "Fruits & Légumes", "008800", "000000"),
+   ( 550, "Boulangerie", "888888", "000000"),
+   ( 600, "Crémerie", "880088", "ffffff"),
+   ( 650, "Produits Frais Lib Serv", "0000ff", "ffffff"),
+   ( 700, "Hygiène", "880000", "ffffff"),
+   ( 800, "Entretien", "ffff00", "000000"),
+   ( 900, "Surgelés", "88ff00", "000000"),
+   ( 999, "Divers", "ff88ff", "000000");
 
 --100    épicerieA   farine, nes, prince, confiture
 --150    épicerieB   choco, madeilene

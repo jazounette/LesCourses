@@ -16,7 +16,7 @@
          $i++;
          if ($i%3 == 0) { $divsoum .= "</tr><tr>"; }
 
-         $divmoud .= '<tr><td style="background-color:#' . $val["couleur"] . '">' . $val["id_zone"] . '</td>';
+         $divmoud .= '<tr><td style="background-color:#' . $val["coulbck"] . '; color:#' . $val["coultxt"] . '">' . $val["id_zone"] . '</td>';
          $divmoud .= '<td>' . $val["nom_zone"] . '</td>';
          $divmoud .= '<td><button onclick="pellerevien(' . $val["id_zone"] . ')">DEL</button></td></tr>';
 

@@ -29,10 +29,11 @@
             </form>
             <br>
             <div id="modzone" class="madzane">
-               <input type="color" name="coulzone" value="#0000ff">
                <input type="text" placeholder="N° ZONE" class="numzone">
-               <input type="text" placeholder="NOM DE LA ZONE">
-               <button class="btnzonad" onclick="leGrandBlond()">ADD</button><br>
+               <input type="text" placeholder="NOM DE LA ZONE"><br>
+               <input type="color" name="coulbck" value="#000064" onchange="prévulve()">FOND
+               <input type="color" name="coultxt" value="#f4fa30" onchange="prévulve()">TEXTE
+               <button class="btnzonad" onclick="leGrandBlond()">ADD</button><br><br>
                <div id="leszonedel"></div>
             </div>
          </div>
@@ -50,6 +51,7 @@
       window.addEventListener("load", vienchezmoi);
       window.addEventListener("load", jhabitechez);
       window.addEventListener("load", zunecopine);
+      window.addEventListener("load", prévulve);
       document.getElementById("refajou").addEventListener("submit", pinosimple); //////traitement formulaire nouveau produits
 
       var cestlazone = 0;
@@ -80,7 +82,15 @@
       }
       function confirmazioné(){
          titi = Math.trunc (Math.random() * nessconfé.length)
-         return confirm (nessconfé[titi])      }
+         return confirm (nessconfé[titi])
+      }
+      function prévulve(){
+         champétre = document.getElementById("modzone").getElementsByTagName("input");
+         champétre[0].style.color = champétre[3].value
+         champétre[0].style.backgroundColor = champétre[2].value
+         champétre[1].style.color = champétre[3].value
+         champétre[1].style.backgroundColor = champétre[2].value
+      }
 
       function AjaxContreHector(hurle, retouràpelle){ ///////////////////AJAX///////////////////
          const xhttp = new XMLHttpRequest();
@@ -175,9 +185,9 @@
          ligneTR = document.getElementById("tableprods").getElementsByTagName("tr")[ligneNB]
          ligneTD = ligneTR.getElementsByTagName("td");
          prodNom = ligneTD[0].innerText;///le nom du produit doit être dans la première case de la ligne du tableau
-         prodPri = ligneTD[1].innerText;///idem pour le prix, il doit être dans la deuxième case
-         ligneTR.classList.add("lignédit");
+         prodPri = ligneTD[1].innerText.slice(0, -1);///idem pour le prix, il doit être dans la deuxième case, slice enléve le €
 
+         ligneTR.classList.add("lignédit");
          nouvTRbis = document.createElement("tr");//nouvTRbis insérer avant pour l'avoir après :o)
          ligneTR.insertAdjacentElement("afterend", nouvTRbis);
          nouvTR = document.createElement("tr");
@@ -222,11 +232,12 @@
 
       function leGrandBlond(){ //////////////////////////////////////////////////ajoute une zone
          champétre = document.getElementById("modzone").getElementsByTagName("input");
-         coleur = champétre[0].value.substr(1);//enlève le #
-         zonome = encodeURIComponent(champétre[2].value);
-         idzone = champétre[1].value;
+         idzone = champétre[0].value;
+         zonome = encodeURIComponent(champétre[1].value);
+         colbck = champétre[2].value.substr(1);//enlève le #
+         coltxt = champétre[3].value.substr(1);//enlève le #
          if ((idzone >= 1) && (idzone <=999)) {
-            hurle = "ajax_zonajou.php?idzone=" + idzone + "&zonome=" + zonome + "&coulzone=" + coleur;
+            hurle = "ajax_zonajou.php?idzone=" + idzone + "&zonome=" + zonome + "&coulbck=" + colbck + "&coultxt=" + coltxt;
             AjaxContreHector(hurle, (xhttp)=> { if (xhttp.responseText > 0) { zunecopine(); jhabitechez(); } } )
          } else alert ("Numéro de Zone incorect\n1 <= N° ZONE <= 999");
       }
@@ -237,7 +248,7 @@
 </html>
 
 <!-- À FAIRE -->
-<!-- mettre une couleur de texte pour les zones. coultxt coulbck -->
+<!-- faire une animation quand on ajoute un article ajouté à la liste de courses (surlignage qui s'estompe avec le temps) -->
 
 <!-- ??? -- rajouter un champ description à la table courses_zones pour mettre dans le tooltip -->
 <!-- ??? -- utiliser classlist.toggle pour déplier/replier les titres de la liste de produits -->
