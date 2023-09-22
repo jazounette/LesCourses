@@ -34,3 +34,8 @@
       $retournage = array("amandine"=>$divsoum, "clémentine"=>$divmoud, "orangine"=>$tdzones);
       echo json_encode($retournage);
    }
+
+   if ($_GET["faire"] == "suplist") {
+      require "loginIdent.php";
+      $req = $db->query("truncate table courses_liste;");
+   }

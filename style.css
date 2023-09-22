@@ -1,22 +1,25 @@
 body { font-family:verdana; background-color: rgb(3, 90, 26);  color: white; margin: 0; }
-.prodtitre { color: white; background-color: pink; text-align: center; border-top: 2px solid white; }
+.prodtitre { color: white; background-color: pink; text-align: center; border-top: 2px solid white; cursor: pointer; }
 .prodtitre td { padding: 5px; }
 .prodtitre:hover { background-color: rgb(0, 221, 255); }
 .prodligne:nth-child(odd) { background-color: green; }
 .prix { text-align: right; width: 55px; }
 .pasprix { text-align: center; width: 55px; }
-.btnsoumi { width: 100%;  height: 44px; }
+.btnsoumi { width: 100%;  height: 44px; border-radius: 5px; }
+.btnsoumi:hover { background-color: rgb(0, 221, 255); border-radius: 5px; }
 .btnzonad { width: 15%; height: 33px; }
 .btnédito { width: 100%; }
 .btnX { width: 30px; height: 30px; border-radius: 50%; }
-.survol td { padding: 8px; }
+.btntout { width: 100%; height: 33px; }
+.survol td { padding: 8px; cursor:pointer; }
 .survol:hover { background-color: rgb(0, 221, 255); color: black; }
 .lignédit>td { background-color: black; }
 #formédit { background-color: black; }
 #formradi { background-color: black; font-size: small; }
 #formradi td div { display: inline-block; width: 25%; white-space: nowrap; overflow: hidden; }
 .surligne { background-color: white; color: black; border-radius: 15px; }
-.titrebloc { background-color: black; color:pink; text-align: center; margin-left: -12px; margin-right: -12px; }
+.titrebloc { background-color: black; color:pink; text-align: center; }
+/* .titrebloc { margin-left: -12px; margin-right: -12px; } */
 .madzane { display:none; }
 .numzone { text-align: right; }
 #ajoutauto { transform: scale(1.6); margin: 0 11px 0 11px; }
@@ -55,6 +58,8 @@ body { font-family:verdana; background-color: rgb(3, 90, 26);  color: white; mar
 .surjaune { background-color: yellowgreen; color: black; border-radius: 0 9px 9px 0; padding-right: 11px; }
 .coliste { width: 12px; height: 108%; margin: -5px 0 -5px -5px; }
 .colprod { padding: 5px; border-radius: 11px; }
+.lederdé { background-color: yellow; color: black; }
+.backsel { background-color: rgb(0, 221, 255); }
 
 #phpversion { position:fixed; bottom: 2px; right: 11px; font-size: 0.8em; }
 #débougajeu { position:fixed; top: 0px; right: 0px; 

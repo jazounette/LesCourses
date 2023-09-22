@@ -13,11 +13,12 @@
          <div class="col-lg">
             <p class="titrebloc">LISTE DE COURSES</p>
             <div class="divrech">
-               <input id="lycos" type="text" name="lycos" placeholder="RECHERCHE" onkeyup="marchàlombre()">
+               <input id="lycos" type="text" name="lycos" placeholder="RECHERCHE" onkeyup="marchàlombre(event)">
                <button class="btnX" onclick="cleanLycos()">X</button>
             </div>
             <div id="réponse"></div>
             <div id="maliste"></div>
+            <button class="btntout" onclick="avecUneChaussNoire()">VIDER TOUTE LA LISTE</button>
          </div>
 
          <div class="col-lg">
@@ -48,16 +49,20 @@
    <div id="phpversion" class="debug"></div>
 
    <script>
-      window.addEventListener("load", vienchezmoi);
-      window.addEventListener("load", jhabitechez);
-      window.addEventListener("load", zunecopine);
-      window.addEventListener("load", prévulve);
+      // window.addEventListener("load", vienchezmoi);
+      // window.addEventListener("load", jhabitechez);
+      // window.addEventListener("load", zunecopine);
+      // window.addEventListener("load", prévulve);
+      vienchezmoi(); jhabitechez(); zunecopine(); prévulve();
       document.getElementById("refajou").addEventListener("submit", pinosimple); //////traitement formulaire nouveau produits
 
       var cestlazone = 0;
       var ligneNB_old = 0; //sauvegarde la position de la ligne en cours d'édition
       var titrouvert = 0; //l'indice du titre de la liste des produits qui est déplié
       var form_rad = ""; //contient les boutons radio de édit article
+      var oldLycos = ""; //recherche en cours, évite requête si le champ n'a pas changé
+      var nbrLycos = 0; //nombre d'articles trouvé par la recherche
+      var ptrLycos = 0; //élément ciblé dans la liste des articles trouvé
       var nessconfé = [ "sûr et certain?", "pas de regrets?", "dernière chance?", 
                   "sûr? vraiment sûr?", "au revoir à jamais?" , "bras coudes genoux?" ];
 
@@ -67,6 +72,7 @@
       function ouverture(toto){  titrouvert = toto; jhabitechez();  }
       function cleanLycos(){
          cleanSurMaliste();
+         oldLycos = ""
          document.getElementById("lycos").value = ""; 
          document.getElementById("refajou").getElementsByTagName("input")["desc"].value = "";
          document.getElementById("réponse").innerHTML = "";     }
@@ -102,27 +108,53 @@
          xhttp.send(); 
       }
 
-      function marchàlombre(){ ////recherche les articles correspondant dans la liste des produits
+      function marchàlombre(e){ ////recherche les articles correspondant dans la liste des produits
          valLycos = document.getElementById("lycos").value;
          innerRép = document.getElementById("réponse");
+         selectTR = document.getElementById("réponse").getElementsByTagName("tr")
+
          document.getElementById("refajou").getElementsByTagName("input")[0].value = valLycos;
-         cleanSurMaliste();
-         if (valLycos.length >= 3) {
-            for (i=0; i<(tabTR.length-1); i++){
-               tabSPAN = tabTR[i].getElementsByTagName("span");
-               toto = tabSPAN[0].innerText.toLowerCase();
-               toto = toto.normalize("NFD").replace(/[\u0300-\u036f]/g, "");//magie voodoo qui vire les accents
-               if (toto.includes(valLycos)) tabSPAN[0].classList.add("surjaune");     }
-            function resulycos(xhttp){  innerRép.innerHTML = xhttp.responseText;  }
-            valLycos = encodeURIComponent(valLycos);
-            AjaxContreHector("ajax_lycos.php?cherche=" + valLycos, resulycos);
-         } else { innerRép.innerHTML = ""}
+         
+         switch(e.key) {
+            case "ArrowDown": if (ptrLycos < (nbrLycos-1)) { ptrLycos++; chauSelect(ptrLycos) }; break;
+            case "ArrowUp" : if (ptrLycos > 0) { ptrLycos--; chauSelect(ptrLycos) }; break;
+            case "Enter" :  if (selectTR.length > 0) { selectTR[ptrLycos].click() }; break;
+            case "Delete" : cleanLycos(); break;
+            default : 
+               if (valLycos.length >= 3) {
+                  if (oldLycos != valLycos)  {
+                        cleanSurMaliste();
+                        oldLycos = valLycos
+                        for (i=0; i<(tabTR.length-1); i++){
+                           tabSPAN = tabTR[i].getElementsByTagName("span");
+                           toto = tabSPAN[0].innerText.toLowerCase();
+                           toto = toto.normalize("NFD").replace(/[\u0300-\u036f]/g, "");//magie voodoo qui vire les accents
+                           if (toto.includes(valLycos)) tabSPAN[0].classList.add("surjaune");     }
+                        function resulycos(xhttp){
+                           innerRép.innerHTML = xhttp.responseText
+                           tabLycos = document.querySelector(".tablelycos tbody")
+                           if (tabLycos) {     nbrLycos = tabLycos.childElementCount; ptrLycos = 0; chauSelect(0);     }
+                           else nbrLycos = 0
+                           // console.log("retour requête lycos " + Math.random())
+                        }
+                        valLycos = encodeURIComponent(valLycos);
+                        AjaxContreHector("ajax_lycos.php?cherche=" + valLycos, resulycos);
+                     }
+                  } else {  innerRép.innerHTML = ""; oldLycos = ""; cleanSurMaliste();  }
+         }
+
+         function chauSelect(pétéair){
+            for (i=0; i<selectTR.length; i++) { selectTR[i].classList.remove("backsel") }
+            selectTR[pétéair].classList.add("backsel")
+         }
       }
 
       function yarienàvoir(idajou){ ////////////////////ajoute un article à la liste des courses
-         document.getElementById("réponse").innerHTML = "";
-         document.getElementById("lycos").value = "";
-         AjaxContreHector("ajax_listajou.php?idajou=" + idajou, (xhttp)=> { if (xhttp.responseText > 0) vienchezmoi(); });
+         cleanLycos()
+         function retouràpelle(xhttp){
+            laréponse = JSON.parse(xhttp.responseText);
+            if (laréponse.rowCount > 0) vienchezmoi(laréponse.lastID);       }
+         AjaxContreHector("ajax_listajou.php?idajou=" + idajou, retouràpelle);
       }
       function mafemmesap(idsupp){ ///////////////////////efface article de la liste des courses
          if (confirmazioné()) {
@@ -134,9 +166,9 @@
             AjaxContreHector("ajax_zonesupp.php?idsupp=" + idsupp, retouràpelle);  }
       }
 
-      function vienchezmoi(){ //////////////////////////////////////affiche la liste des courses
+      function vienchezmoi(lastIDlist=0){ //////////////////////////////////////affiche la liste des courses
          function chauliste(xhttp){  document.getElementById("maliste").innerHTML = xhttp.responseText;  }
-         AjaxContreHector("ajax_maliste.php", chauliste);
+         AjaxContreHector("ajax_maliste.php?lastIDlist=" + lastIDlist, chauliste);
       }
       function jhabitechez(){ /////////////////////////////////////affiche la liste des produits
          function chauliste(xhttp){  document.getElementById("mesprods").innerHTML = xhttp.responseText;  }
@@ -242,13 +274,22 @@
          } else alert ("Numéro de Zone incorect\n1 <= N° ZONE <= 999");
       }
 
+      function avecUneChaussNoire(){
+         if (confirm("ATTENTION TOUTE LA LISTE DE COURSE VA ÊTRE EFFACÉE\nUn risque de coupure internet global est possible\nPoupoutte va peut-être lancer un missile nucléaire\n"))
+            if (confirmazioné()) AjaxContreHector("ajax_divers.php?faire=suplist", (xhttp) => vienchezmoi())
+      }
+
 
    </script>
 </body>
 </html>
 
 <!-- À FAIRE -->
+<!-- faire un system de chargement en cours pour les blocs -->
+<!-- problème de surlignage des articles de la liste de course pendant une recherche avec les accents -->
+<!-- mettre le hover sur les bouttons soumission en bleu cyan comme les autres hover -->
 <!-- faire une animation quand on ajoute un article ajouté à la liste de courses (surlignage qui s'estompe avec le temps) -->
+<!-- ajouter un bouton éditer pour les zones (à côté du bouton ADD) -->
 
 <!-- ??? -- rajouter un champ description à la table courses_zones pour mettre dans le tooltip -->
 <!-- ??? -- utiliser classlist.toggle pour déplier/replier les titres de la liste de produits -->

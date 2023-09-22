@@ -56,7 +56,7 @@ INSERT INTO `courses_zones` VALUES
    ( 650, "Produits Frais Lib Serv", "0000ff", "ffffff"),
    ( 700, "Hygiène", "880000", "ffffff"),
    ( 800, "Entretien", "ffff00", "000000"),
-   ( 900, "Surgelés", "88ff00", "000000"),
+   ( 900, "Surgelés", "ffffff", "000000"),
    ( 999, "Divers", "ff88ff", "000000");
 
 --100    épicerieA   farine, nes, prince, confiture

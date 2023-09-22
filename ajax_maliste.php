@@ -30,7 +30,8 @@
          echo "<td><div class='coliste' style='background-color: #" . $val["coulbck"] . "'></div></td>";
          if (isset($val["prix"])) { $euro = "€"; $laclasse = "prix"; }
             else { $euro = "-"; $laclasse = "pasprix"; }
-         echo "<td><span>" . $val["describ"] . "</span></td>";
+         $laclassos = ($_GET["lastIDlist"] == $val["id_list"]) ? " class='lederdé'" : "";
+         echo "<td><span" . $laclassos . ">" . $val["describ"] . "</span></td>";
          echo "<td class='" . $laclasse . "'>" . $val["prix"] . $euro . "</td>";
          echo "<td class='tdbout'><button onclick='mafemmesap(" . $val["id_list"] . ")'>DEL</button></td>";
          echo "</tr>";
