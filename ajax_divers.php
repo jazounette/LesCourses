@@ -17,8 +17,8 @@
          if ($i%3 == 0) { $divsoum .= "</tr><tr>"; }
 
          $divmoud .= '<tr><td style="background-color:#' . $val["coulbck"] . '; color:#' . $val["coultxt"] . '">' . $val["id_zone"] . '</td>';
-         $divmoud .= '<td>' . $val["nom_zone"] . '</td>';
-         $divmoud .= '<td><button onclick="pellerevien(' . $val["id_zone"] . ')">DEL</button></td></tr>';
+         $divmoud .= '<td onclick="laCarapate(' . $val["id_zone"] . ', \'' . $val["nom_zone"] . '\', \'' . $val["coulbck"] . '\', \'' . $val["coultxt"] . '\')">' . $val["nom_zone"] . '</td>';
+         $divmoud .= '<td><button onclick="pellerevien(' . $val["id_zone"] . ')">✖</button></td></tr>';
 
          $tdzones .= '<div onclick="surligne()">';
          $tdzones .= '<input type="radio" name="zone" id="zone' . $val["id_zone"] . '" value="' . $val["id_zone"] . '">';

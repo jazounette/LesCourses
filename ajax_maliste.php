@@ -33,7 +33,7 @@
          $laclassos = ($_GET["lastIDlist"] == $val["id_list"]) ? " class='lederdé'" : "";
          echo "<td><span" . $laclassos . ">" . $val["describ"] . "</span></td>";
          echo "<td class='" . $laclasse . "'>" . $val["prix"] . $euro . "</td>";
-         echo "<td class='tdbout'><button onclick='mafemmesap(" . $val["id_list"] . ")'>DEL</button></td>";
+         echo "<td class='tdbout'><button onclick='mafemmesap(" . $val["id_list"] . ")'>✘</button></td>";
          echo "</tr>";
       }
       echo "<tr><td colspan='3' style='text-align:right'>" . $req->rowCount() . $nompro[$nomrnd] . " / TOTAL=" . $somprx . "€</td><td></td></tr>";

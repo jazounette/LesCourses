@@ -28,7 +28,7 @@
             echo '<tr class="prodligne">';
             echo "<td>" . $val["describ"] . "</td>";
             echo "<td class='" . $laclasse . "'>" . $val["prix"] . $euro . "</td>";
-            echo "<td class='tdbout'><button onclick='lesroidugag(" . $val["id_prod"] . ")'>DEL</button></td>";//bouton effacer un produits
+            echo "<td class='tdbout'><button onclick='lesroidugag(" . $val["id_prod"] . ")'>✘</button></td>";//bouton effacer un produits
             echo "<td class='tdbout'><button onclick='pour100briq(" . $val["id_prod"] . ", " . $val["zone"] . ", " . $ligne . ")'>ÉDiT</button></td>";//bouton éditer un produits
             echo "<td class='tdbout'><button onclick='yarienàvoir(" . $val["id_prod"] . ")'>ADD</button></td>";//bouton ajouter un article à la liste de course
             echo "<td class='debug'>" . $val["id_prod"] . "</td>";
